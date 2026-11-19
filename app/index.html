@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff5e78'/%3E%3Ctext x='16' y='23' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ESC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">SC</span>
+    <div>
+      <h1>Sunset Cover Studio</h1>
+      <p>Turn your photos into bold multi-panel cover art — offline, in your browser.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undoBtn" class="ghost" disabled>Undo</button>
+    <button id="redoBtn" class="ghost" disabled>Redo</button>
+    <button id="randomBtn" class="ghost">🎲 Randomise</button>
+    <button id="exportBtn" class="export">Export PNG</button>
+  </div>
+</header>
+
+<main class="editor">
+  <aside class="panel left">
+    <section>
+      <h2>1 · Your photos</h2>
+      <div id="dropZone" class="dropzone">
+        <label for="fileInput" class="file-label">+ Add photos from your device</label>
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        <p>…or drop image files anywhere on this panel.</p>
+      </div>
+      <div id="photoTray" class="tray"></div>
+    </section>
+
+    <section>
+      <h2>2 · Layout</h2>
+      <div id="layoutPicker" class="picker"></div>
+    </section>
+
+    <section>
+      <h2>3 · Colour grade</h2>
+      <div id="gradePicker" class="grades"></div>
+    </section>
+
+    <section>
+      <h2>4 · Caption</h2>
+      <label class="field">Title
+        <input id="titleInput" type="text" value="SUNSET CITY" maxlength="24">
+      </label>
+      <label class="field">Subtitle
+        <input id="subtitleInput" type="text" value="one last ride" maxlength="48">
+      </label>
+      <label class="field">Ribbon badge
+        <input id="ribbonInput" type="text" value="SUNSET CITY" maxlength="24">
+      </label>
+    </section>
+
+    <section>
+      <h2>5 · Crop the selected panel</h2>
+      <div class="row">
+        <label class="field grow">Panel
+          <select id="panelSelect"></select>
+        </label>
+        <label class="field grow">Photo
+          <select id="panelPhoto"></select>
+        </label>
+      </div>
+      <label class="field">Zoom — <span id="zoomLabel">100%</span>
+        <input id="zoomSlider" type="range" min="1" max="3" step="0.05" value="1">
+      </label>
+      <p class="hint">Tip: click a panel in the preview, then drag it to pan and scroll to zoom.</p>
+      <div class="row">
+        <button id="resetCropBtn" class="ghost">Reset crop</button>
+        <button id="fillOneBtn" class="ghost">One photo in every panel</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>6 · Effects</h2>
+      <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="halftoneToggle" type="checkbox" checked> Halftone title block</label>
+    </section>
+  </aside>
+
+  <section class="stage">
+    <div class="stage-head">
+      <h2>Live preview</h2>
+      <div id="sizePicker" class="picker sizes"></div>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="preview" width="960" height="540"></canvas>
+    </div>
+    <p id="statusLine" class="status">Pick a layout, a grade and a caption — then Export PNG.</p>
+    <p class="fineprint">Your photos never leave this machine. Fonts: Anton &amp; Pacifico (SIL Open Font License) under app/fonts/. All artwork is original — no Rockstar Games logos, artwork or fonts.</p>
+  </section>
+</main>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
